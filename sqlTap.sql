@@ -1,4 +1,5 @@
 -- Find person's detials Like Name,employee code ,mail ,phone ?
+
 select
     person.FIRST_NAME_TXT,LAST_NAME_TXT,email.EMAIL_ID_TXT,phone.PHONE_NUMBER_TXT
 from t_prn_eu_person person
@@ -10,6 +11,7 @@ where person.IS_DELETED=false and person.ACTIVE_STATE_CODE_FK_ID='ACTIVE' and pe
 and phone.IS_DELETED=false and phone.ACTIVE_STATE_CODE_FK_ID='ACTIVE' and phone.RECORD_STATE_CODE_FK_ID='CURRENT';
 
 -- Find person primary position ?
+
 select
     person.FIRST_NAME_TXT,person.LAST_NAME_TXT,position.POSITION_NAME_G11N_BIG_TXT
 from t_prn_eu_person person
@@ -22,6 +24,7 @@ and position.IS_DELETED=false and position.ACTIVE_STATE_CODE_FK_ID='ACTIVE' and 
 AND job.IS_PRIMARY=true;
 
 -- Find person is seconded?
+
 select
     person.FIRST_NAME_TXT,person.LAST_NAME_TXT,position.POSITION_NAME_G11N_BIG_TXT
 from t_prn_eu_person person
@@ -34,6 +37,7 @@ and position.IS_DELETED=false and position.ACTIVE_STATE_CODE_FK_ID='ACTIVE' and 
 AND job.IS_PRIMARY=false;
 
 -- Find person all position?
+
 select
     person.FIRST_NAME_TXT,person.LAST_NAME_TXT,position.POSITION_NAME_G11N_BIG_TXT
 from t_prn_eu_person person
@@ -45,13 +49,6 @@ where person.IS_DELETED=false and person.ACTIVE_STATE_CODE_FK_ID='ACTIVE' and pe
 and position.IS_DELETED=false and position.ACTIVE_STATE_CODE_FK_ID='ACTIVE' and position.RECORD_STATE_CODE_FK_ID='CURRENT';
 
 -- Find person direct manager?
-select * from t_jdm_adm_org_job_description_manager;
-describe t_prn_eu_person;
-describe t_org_adm_org_job_pay_grd_posn;
-
-describe t_prn_eu_person_job_assignment_dates;
-select * from t_prn_eu_person_job_relationship;
-describe t_prn_eu_person_job_relationship;
 
 select
     person.FIRST_NAME_TXT, relperson.FIRST_NAME_TXT,relation.RELATIONSHIP_TYPE_CODE_DEP_FK_ID
@@ -102,34 +99,6 @@ AND COMPENSATION.ACTIVE_STATE_CODE_FK_ID='ACTIVE' and COMPENSATION.IS_DELETED=fa
 
 -- Find person all roles?
 
-select JOB_ROLE_NAME_G11N_BIG_TXT from t_job_adm_job_role;
-describe t_job_adm_job_role;
-
-
-describe t_job_adm_job_family;
-describe t_job_adm_work_schedule_map;
-select * from t_prn_eu_person_job_assignment;
-select * from t_prn_eu_person_job_relationship;
-describe t_job_adm_work_schedule_map;
-
-
-
--- JOB_ROLE_NAME_G11N_BIG_TXT
-describe t_prn_eu_person;-- PERSON_PK_ID,PRN_TXN_FK_ID,NAME_PREFIX_FK_ID,NAME_SUFFIX_FK_ID
-describe t_prn_eu_person_job_assignment;-- PERSON_PK_ID=PERSON_DEP_FK_ID
-describe t_prn_adm_compensation;-- PERSON_JOB_ASSIGNMENT_PK_ID=PERSON_JOB_ASSIGNMENT_DEP_FK_ID
-
-describe t_job_adm_job_role;-- JOB_ROLE_PK_ID,JOB_FAMILY_FK_ID,WORK_SCHEDULE_FK_ID,FLSA_STATUS_FK_ID,EMPLOYEE_COST_CLASSIFICATION_FK_ID,JOB_SUB_FAMILY_FK_ID,JOB_ROLE_ICON_CODE_FK_ID,INDUSTRY_FK_ID,JOB_CLASS_FK_ID
-describe t_job_adm_job_family;-- JOB_FAMILY_ICON_CODE_FK_ID,SLF_PRNT_JOB_FAMILY_HCY_FK_ID
-
-select JOB_ROLE_FK_ID,JOB_ROLE_NAME_G11N_BIG_TXT from t_org_adm_org_job_pay_grd_posn;
-
-
-desc t_prn_eu_person_job_assignment;
-desc t_prn_eu_person_job_assignment_dates;
-
-describe t_org_adm_org_job_pay_grd_posn;
-
 select
     person.FIRST_NAME_TXT,person.LAST_NAME_TXT,paygradepos.JOB_ROLE_NAME_G11N_BIG_TXT
 from t_prn_eu_person person
@@ -142,16 +111,6 @@ WHERE person.ACTIVE_STATE_CODE_FK_ID='ACTIVE' and person.IS_DELETED=false and pe
 AND paygradepos.ACTIVE_STATE_CODE_FK_ID='ACTIVE' and paygradepos.IS_DELETED=false and paygradepos.RECORD_STATE_CODE_FK_ID='CURRENT';
 
 -- find person all group?
-
--- t_prn_eu_person person --> t_prn_eu_person_job_assignment_dates
--- t_perm_adm_group --> t_perm_adm_group_to_relationship_map
-
-desc t_perm_adm_group;-- NAME_G11N_BIG_TXT
-desc t_perm_adm_group_to_relationship_map; -- groupfkid
-
-desc t_org_adm_org_job_pay_grd_posn; -- ORG_JOB_PAY_GRADE_MAP_DEP_FK_ID
-desc t_org_adm_org_job_pay_grade_map; -- ORG_JOB_PAY_GRADE_BAND_MAP_DEP_FK_ID
-desc t_org_adm_org_job_pay_grd_posn;
 
 select
     person.FIRST_NAME_TXT,person.LAST_NAME_TXT,groupp.NAME_G11N_BIG_TXT
