@@ -26,7 +26,7 @@ AND job.IS_PRIMARY=true;
 -- Find person is seconded?
 
 select
-    person.FIRST_NAME_TXT,person.LAST_NAME_TXT,position.POSITION_NAME_G11N_BIG_TXT
+    person.LEGAL_FULL_NAME_G11N_BIG_TXT as name,POSITION_NAME_G11N_BIG_TXT as posn_name
 from t_prn_eu_person person
 join t_prn_eu_person_job_assignment_dates job
 on person.PERSON_PK_ID=job.PERSON_FK_ID
@@ -34,7 +34,7 @@ join t_org_adm_org_job_pay_grd_posn position
 on job.ORG_JOB_PAY_GRADE_POSITION_MAP_FK_ID=position.ORG_JOB_PAY_GRD_POSTN_PK_ID
 where person.IS_DELETED=false and person.ACTIVE_STATE_CODE_FK_ID='ACTIVE' and person.RECORD_STATE_CODE_FK_ID='CURRENT' and job.IS_DELETED=false and job.ACTIVE_STATE_CODE_FK_ID='ACTIVE' and job.RECORD_STATE_CODE_FK_ID='CURRENT'
 and position.IS_DELETED=false and position.ACTIVE_STATE_CODE_FK_ID='ACTIVE' and position.RECORD_STATE_CODE_FK_ID='CURRENT'
-AND job.IS_PRIMARY=false;
+and job.ACTUAL_ASSIGNMENT_END_DATETIME is null group by person.PERSON_PK_ID having count(person.PERSON_PK_ID)>1;
 
 -- Find person all position?
 
